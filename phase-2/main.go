@@ -6,40 +6,57 @@ import (
 	"strings"
 )
 
-func convtodec(hexstr string, base int) (int64, error) {
-	return strconv.ParseInt(hexstr, base, 64)
+func convtodec(num string, base int) (int64, error) {
+	return strconv.ParseInt(num, base, 64)
 }
 
 func main() {
+	fmt.Println("Base Converter  (type 'quit' to exit)")
 
-	fmt.Println("which number did you want to convert between bases")
 	for {
-		var input1 string
-		fmt.Println("Enter Value:")
-		fmt.Scan(&input1)
+		var num, base string
+		fmt.Println("Enter value to be converted")
+		fmt.Print("> ")
+		fmt.Scan(&num)
 
-		var operator string
-		fmt.Println("operation: dec  bin  hex  other")
-		fmt.Scan(&operator)
+		if num == "quit" {
+			break
+		}
+		fmt.Println("Use bin, hex, or dec")
+		fmt.Scan(&base)
+		base = strings.ToLower(base)
 
-		switch operator {
-		case "bin", "Bin":
-			fmt.Println(convtodec(input1, 2))
-		case "hex", "Hex":
-			fmt.Println(convtodec(input1, 16))
-			return
-		case "dec", "Dec":
-			var num int64
-			fmt.Scan(&num)
-			fmt.Println(strings.ToUpper(strconv.FormatInt(num, 16)))
-			fmt.Println(strconv.FormatInt(num, 2))
-			// str is "11111111"
+		switch base {
+		case "bin":
+			if val, err := convtodec(num, 2); err == nil {
+				fmt.Println("Decimal:", val)
+			} else {
+				fmt.Println("Error: '" + num + "' is not valid binary")
+			}
 
-			// str is "ff"
+		case "hex":
+			if val, err := convtodec(num, 16); err == nil {
+				fmt.Println("Decimal:", val)
+			} else {
+				fmt.Println("Error: '" + num + "' is not valid hex")
+			}
 
-			// fmt.Println(convtodec("1E", 16))
-			// fmt.Println(convtodec("10", 2))
-			// fmt.Println(convtodec("255", 10))
+		case "dec":
+			if val, err := convtodec(num, 10); err == nil {
+				if val < 0 {
+					val = -val
+					fmt.Println("Binary: -" + strconv.FormatInt(val, 2))
+					fmt.Println("Hex: -" + strings.ToUpper(strconv.FormatInt(val, 16)))
+				} else {
+					fmt.Println("Binary:", strconv.FormatInt(val, 2))
+					fmt.Println("Hex:", strings.ToUpper(strconv.FormatInt(val, 16)))
+				}
+			} else {
+				fmt.Println("Error: '" + num + "' is not valid decimal")
+			}
+
+		default:
+			fmt.Println("Error: Use bin, hex, or dec")
 		}
 	}
 }
