@@ -1,12 +1,7 @@
-package main
-
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-	"time"
-)
+// CodeCrafters — Operation Gopher Protocol
+// Module: File Pipeline
+// Author: [CHRISTOPHER OKOH]
+// Squad:  [THE iNTERFACE]
 
 /*
 // ═══════════════════════════════════════════
@@ -42,7 +37,17 @@ import (
 ═════════════════════════════════════════
 */
 
-func allCaps(line string) string {
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+	"time"
+)
+
+func CapAll(line string) string {
 	if line == strings.ToUpper(line) && line != "" {
 		words := strings.Fields(line)
 		for i, w := range words {
@@ -60,10 +65,10 @@ func lowerToUpper(line string) string {
 	return line
 }
 
-func trim(line string) string {
+func TRIM(line string) string {
 	return strings.TrimSpace(line)
 }
-func reverse(line string) string {
+func REVERSE(line string) string {
 	if strings.Contains(line, "REVERSE") {
 		words := strings.Fields(line)
 		for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
@@ -74,7 +79,7 @@ func reverse(line string) string {
 	return line
 }
 
-func isDashorBlank(line string) bool {
+func IsBlankOrDash(line string) bool {
 	trimmed := strings.TrimSpace(line)
 	return trimmed == "" || trimmed == "─────────────────────────"
 }
@@ -116,11 +121,11 @@ func main() {
 		line := scanner.Text()
 		linesRead++
 
-		line = allCaps(line)
+		line = CapAll(line)
 		line = lowerToUpper(line)
-		line = trim(line)
-		line = reverse(line)
-		if isDashorBlank(line) {
+		line = TRIM(line)
+		line = REVERSE(line)
+		if IsBlankOrDash(line) {
 			linesRemoved++
 			continue
 		}
