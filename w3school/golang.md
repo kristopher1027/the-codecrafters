@@ -187,6 +187,28 @@ for i := 0; i < 5; i++ {
 ```
 ### Explanation
 * only loop in Go = for
+### But it can act as:
+* normal loop
+* while loop
+* infinite loop
+
+
+> range
+Used to loop over collections (array, slice, map)
+```go
+for i, v := range arr {
+    fmt.Println(i, v)
+}
+```
+> Nested loops
+Yes, Go supports loops inside loops:
+```go
+for i := 0; i < 3; i++ {
+    for j := 0; j < 3; j++ {
+        fmt.Println(i, j)
+    }
+}
+```
 
 
 
