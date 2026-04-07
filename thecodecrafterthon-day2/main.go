@@ -25,6 +25,7 @@ func main() {
 		fmt.Scan(&num)
 
 		if num == "quit" {
+			fmt.Println("thanks for your time")
 			break
 		}
 		fmt.Println("Use bin, hex, or dec")
